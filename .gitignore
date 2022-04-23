@@ -88,3 +88,9 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Explicit Ignore
+.env_prod
+.env_dev
+Converter/Config/Development.xcconfig
+Converter/Config/Production.xcconfig

@@ -17,6 +17,7 @@
 		61E78E562813CBF1009112A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E78E542813CBF1009112A1 /* LaunchScreen.storyboard */; };
 		61E78E612813CBF1009112A1 /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E602813CBF1009112A1 /* ConverterTests.swift */; };
 		61E78E6C2813CBF2009112A1 /* ConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E6B2813CBF2009112A1 /* ConverterUITests.swift */; };
+		61E78EB32813DE4A009112A1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78EB22813DE4A009112A1 /* Environment.swift */; };
 		ACFB0FF7179B15855C25D0F5 /* Pods_ConverterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9826C8AB8D1960F76390BA37 /* Pods_ConverterTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,9 @@
 		61E78E672813CBF2009112A1 /* ConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E78E6B2813CBF2009112A1 /* ConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterUITests.swift; sourceTree = "<group>"; };
 		61E78E6D2813CBF2009112A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61E78EA72813DB96009112A1 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		61E78EA82813DBAE009112A1 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		61E78EB22813DE4A009112A1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		67573DD19D69BFC23A5675A0 /* Pods_Converter_ConverterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Converter_ConverterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		738B03213B73D2EA7A4845E9 /* Pods-Converter-ConverterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Converter-ConverterUITests.release.xcconfig"; path = "Target Support Files/Pods-Converter-ConverterUITests/Pods-Converter-ConverterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8DDB6A3C3F8DC6D5AA9752A8 /* Pods_Converter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Converter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +133,7 @@
 		61E78E482813CBED009112A1 /* Converter */ = {
 			isa = PBXGroup;
 			children = (
+				61E78EA62813DB7B009112A1 /* Config */,
 				61E78E492813CBED009112A1 /* AppDelegate.swift */,
 				61E78E4B2813CBED009112A1 /* SceneDelegate.swift */,
 				61E78E4D2813CBED009112A1 /* ViewController.swift */,
@@ -156,6 +161,16 @@
 				61E78E6D2813CBF2009112A1 /* Info.plist */,
 			);
 			path = ConverterUITests;
+			sourceTree = "<group>";
+		};
+		61E78EA62813DB7B009112A1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				61E78EA72813DB96009112A1 /* Development.xcconfig */,
+				61E78EA82813DBAE009112A1 /* Production.xcconfig */,
+				61E78EB22813DE4A009112A1 /* Environment.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		BEC172D27C44F23329ADA0BF /* Frameworks */ = {
@@ -407,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61E78E4E2813CBED009112A1 /* ViewController.swift in Sources */,
+				61E78EB32813DE4A009112A1 /* Environment.swift in Sources */,
 				61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */,
 				61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */,
 			);
@@ -465,6 +481,7 @@
 /* Begin XCBuildConfiguration section */
 		61E78E6E2813CBF2009112A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61E78EA72813DB96009112A1 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -518,6 +535,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEVELOPMENT";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -526,6 +544,7 @@
 		};
 		61E78E6F2813CBF2009112A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61E78EA82813DBAE009112A1 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -572,6 +591,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-DPRODUCTION";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -591,7 +611,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nagarro.Converter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nagarro.converter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -610,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nagarro.Converter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nagarro.converter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
