@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ConverterViewController: UIViewController {
     // MARK: - Instance variables
@@ -19,11 +21,39 @@ class ConverterViewController: UIViewController {
         let viewModel = ConverterViewModel()
         return viewModel
     }()
+    private let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupObserver()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.getLatestValues()
+        viewModel.getHistoricalValues()
+    }
+
+    // MARK: User Defined function
+    private func setupObserver() {
+        viewModel.latestValue.asObservable()
+            .subscribe(onNext: {
+                [unowned self] value in
+                self.updateView(value: value)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.historicalValue.asObservable()
+            .subscribe(onNext: {
+                [unowned self] value in
+                self.updateView(value: value)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func updateView(value: ConverterData?) {
     }
 
 }
