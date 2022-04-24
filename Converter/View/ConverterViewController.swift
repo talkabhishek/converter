@@ -38,6 +38,7 @@ class ConverterViewController: UIViewController {
 
     // MARK: User Defined function
     private func setupObserver() {
+        // Observe API response
         viewModel.latestValue.asObservable()
             .subscribe(onNext: {
                 [unowned self] value in
@@ -52,6 +53,7 @@ class ConverterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
+        // Observe From & To Button
         viewModel.fromButtonValue
             .bind(to: fromButton.rx.title())
             .disposed(by: disposeBag)
@@ -77,6 +79,22 @@ class ConverterViewController: UIViewController {
                                   dataSource: self.viewModel.currienties.value)
           })
           .disposed(by: disposeBag)
+
+        // Observe Swap Button
+        swapButton
+            .rx
+            .tap
+            .asObservable()
+            .subscribe(onNext: { [unowned self] _ in
+                guard self.viewModel.fromButtonValue.value != "From" &&
+                        self.viewModel.toButtonValue.value != "To" else {
+                    return
+                }
+                let swapValue = self.viewModel.fromButtonValue.value
+                self.viewModel.fromButtonValue.accept(self.viewModel.toButtonValue.value)
+                self.viewModel.toButtonValue.accept(swapValue)
+          })
+          .disposed(by: disposeBag)
     }
 
     func updateView(value: ConverterData?) {
@@ -97,7 +115,6 @@ class ConverterViewController: UIViewController {
             guard let value = value else {
                 return
             }
-            //source.setTitle(value, for: .normal)
             if source == self.fromButton {
                 self.viewModel.fromButtonValue.accept(value)
             } else {
