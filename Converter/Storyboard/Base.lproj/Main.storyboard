@@ -25,7 +25,7 @@
                                 </constraints>
                                 <state key="normal" image="swap"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if5-Wr-ngA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if5-Wr-ngA">
                                 <rect key="frame" x="50" y="188" width="97" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Old-0f-l5H"/>
@@ -45,7 +45,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqb-PR-nZP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqb-PR-nZP">
                                 <rect key="frame" x="267" y="188" width="97" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ub1-yn-vTA"/>
