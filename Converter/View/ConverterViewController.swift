@@ -21,6 +21,7 @@ class ConverterViewController: UIViewController {
         let viewModel = ConverterViewModel()
         return viewModel
     }()
+    private let throttleIntervalInMilliseconds = 100
     private let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle
@@ -41,15 +42,13 @@ class ConverterViewController: UIViewController {
     private func setupObserver() {
         // Observe API response
         viewModel.latestValue.asObservable()
-            .subscribe(onNext: {
-                [unowned self] value in
+            .subscribe(onNext: { [unowned self] value in
                 self.updateView(value: value)
             })
             .disposed(by: disposeBag)
 
         viewModel.historicalValue.asObservable()
-            .subscribe(onNext: {
-                [unowned self] value in
+            .subscribe(onNext: { [unowned self] value in
                 self.updateView(value: value)
             })
             .disposed(by: disposeBag)
@@ -96,6 +95,32 @@ class ConverterViewController: UIViewController {
                 self.viewModel.toButtonValue.accept(swapValue)
           })
           .disposed(by: disposeBag)
+
+        // Observer Textfield change
+        viewModel.fromFieldValue.observe(on: MainScheduler.asyncInstance)
+            .bind(to: fromTextField.rx.text)
+            .disposed(by: disposeBag)
+        fromTextField
+            .rx
+            .text
+            .observe(on: MainScheduler.asyncInstance)
+            .map { [unowned self] value in
+                self.viewModel.setTo(fromValue: value)
+            }.subscribe()
+          .disposed(by: disposeBag)
+
+        viewModel.toFieldValue.observe(on: MainScheduler.asyncInstance)
+            .bind(to: toTextField.rx.text)
+            .disposed(by: disposeBag)
+        toTextField
+            .rx
+            .text
+            .observe(on: MainScheduler.asyncInstance)
+            .map { [unowned self] value in
+                self.viewModel.setFrom(toValue: value)
+            }.subscribe()
+          .disposed(by: disposeBag)
+
     }
 
     func updateView(value: ConverterData?) {
@@ -118,8 +143,12 @@ class ConverterViewController: UIViewController {
             }
             if source == self.fromButton {
                 self.viewModel.fromButtonValue.accept(value)
+                let fromValue = self.viewModel.fromFieldValue.value
+                self.viewModel.setTo(fromValue: fromValue)
             } else {
                 self.viewModel.toButtonValue.accept(value)
+                let toValue = self.viewModel.toFieldValue.value
+                self.viewModel.setFrom(toValue: toValue)
             }
         }).disposed(by: disposeBag)
     }

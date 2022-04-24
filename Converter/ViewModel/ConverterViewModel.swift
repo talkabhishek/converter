@@ -18,6 +18,8 @@ struct ConverterViewModel: AlertProtocol {
     let currienties: BehaviorRelay<[String]> = BehaviorRelay(value: ["USD", "INR", "ALL", "BCG", "YUN"])
     let fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
     let toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
+    let fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    let toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
 
     init(apiServiceManager: APIServiceProtocol = APIServiceManager()) {
         self.apiServiceManager = apiServiceManager
@@ -60,5 +62,33 @@ struct ConverterViewModel: AlertProtocol {
                 presentAlert(title: nil, message: error.error?.info)
             }
         }
+    }
+
+    func setTo(fromValue: String?) {
+        let toValue = convert(
+            value: fromValue,
+            fromSymbol: fromButtonValue.value,
+            toSymbol: toButtonValue.value)
+        toFieldValue.accept(toValue)
+    }
+
+    func setFrom(toValue: String?) {
+        let fromValue = convert(
+            value: toValue,
+            fromSymbol: toButtonValue.value,
+            toSymbol: fromButtonValue.value)
+        fromFieldValue.accept(fromValue)
+    }
+
+    func convert(value: String?, fromSymbol: String, toSymbol: String) -> String {
+        guard let value = value,
+              let doubleValue = Double(value),
+              let rates = latestValue.value?.rates,
+              let fromValue = rates[fromSymbol],
+              let toValue = rates[toSymbol] else {
+            return ""
+        }
+        let result = toValue / fromValue * doubleValue
+        return result.twoFractionString
     }
 }
