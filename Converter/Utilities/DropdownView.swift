@@ -59,22 +59,15 @@ class DropdownView: UIView {
         heightConstraint.isActive = true
 
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+        transparentView.alpha = 0.5
         transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         transparentView.addGestureRecognizer(tapgesture)
-        transparentView.alpha = 0
         tableView.layer.cornerRadius = 5
         tableView.reloadData()
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.transparentView.alpha = 0.5
-            self.layoutIfNeeded()
-        }, completion: nil)
     }
 
     @objc private func removeTransparentView() {
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.transparentView.alpha = 0
-            self.removeFromSuperview()
-        }, completion: nil)
+        removeFromSuperview()
     }
 
 }

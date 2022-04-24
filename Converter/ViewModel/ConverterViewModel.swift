@@ -15,7 +15,7 @@ struct ConverterViewModel: AlertProtocol {
     let apiServiceManager: APIServiceProtocol
     let latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
     let historicalValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
-    let currienties: BehaviorRelay<[String]> = BehaviorRelay(value: [])
+    let currienties: BehaviorRelay<[String]> = BehaviorRelay(value: ["USD", "INR", "ALL", "BCG", "YUN"])
     let fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
     let toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
 
