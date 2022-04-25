@@ -82,7 +82,9 @@ struct APIServiceManager {
         do {
             switch httpResponse.statusCode {
             case 200...299:
-                let successResponse = try JSONDecoder().decode(T.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMdd)
+                let successResponse = try decoder.decode(T.self, from: data)
                 completion(.success(successResponse))
             default:
                 let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)

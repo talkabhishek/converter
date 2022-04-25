@@ -20,31 +20,21 @@ class DetailsViewController: UIViewController, AlertProtocol, IdentifierProtocol
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Details"~
-        setupObserver()
     }
 
-    // MARK: User Defined function
-    private func setupObserver() {
-        // Observe API response
-        viewModel.historicalValue.asObservable()
-            .subscribe(onNext: { [unowned self] value in
-                self.updateView(value: value)
-            })
-            .disposed(by: disposeBag)
-
-        // Observe Error
-        viewModel.errorData
-            .asObservable()
-            .subscribe(onNext: { [unowned self] value in
-                guard let error = value else {
-                    return
-                }
-                self.presentAlert(title: nil, message: error.info)
-            })
-            .disposed(by: disposeBag)
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? HistoricalListViewController {
+            viewController.viewModel = HistoricalListViewModel(
+                fromSymbol: viewModel.fromSymbol,
+                toSymbol: viewModel.toSymbol,
+                baseValue: viewModel.baseValue)
+        } else if let viewController = segue.destination as? TopCurrenciesViewController {
+            viewController.viewModel = TopCurrenciesViewModel(
+                fromSymbol: viewModel.fromSymbol,
+                toSymbol: viewModel.toSymbol,
+                baseValue: viewModel.baseValue)
+        }
     }
 
-    func updateView(value: ConverterData?) {
-
-    }
 }

@@ -8,16 +8,16 @@
 import Foundation
 
 extension APIServiceManager: APIServiceProtocol {
-    func getLatest(symbols: String, format: String, completion: @escaping (Callback<ConverterData?>)) {
+    func getLatest(symbols: String, format: String, completion: @escaping (Callback<ConverterData>)) {
         getResponseSession(service: APIService.latest(symbols: symbols, format: format)
-        ) { (response: Result<ConverterData?, ErrorResponse>) in
+        ) { (response: Result<ConverterData, ErrorResponse>) in
             completion(response)
         }
     }
 
-    func getHistorical(date: String, symbols: String, format: String, completion: @escaping (Callback<ConverterData?>)) {
+    func getHistorical(date: String, symbols: String, format: String, completion: @escaping (Callback<ConverterData>)) {
         getResponseSession(service: APIService.historical(date: date, symbols: symbols, format: format)
-        ) { (response: Result<ConverterData?, ErrorResponse>) in
+        ) { (response: Result<ConverterData, ErrorResponse>) in
             completion(response)
         }
     }

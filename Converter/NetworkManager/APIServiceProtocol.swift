@@ -10,6 +10,6 @@ typealias CallbackVoid = () -> Void
 typealias Callback<T> = (Result<T, ErrorResponse>) -> Void
 
 protocol APIServiceProtocol {
-    func getLatest(symbols: String, format: String, completion: @escaping (Callback<ConverterData?>))
-    func getHistorical(date: String, symbols: String, format: String, completion: @escaping (Callback<ConverterData?>))
+    func getLatest(symbols: String, format: String, completion: @escaping (Callback<ConverterData>))
+    func getHistorical(date: String, symbols: String, format: String, completion: @escaping (Callback<ConverterData>))
 }

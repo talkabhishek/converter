@@ -9,9 +9,10 @@ import Foundation
 // MARK: - ConverterData
 struct ConverterData: Codable {
     let success: Bool?
-    let timestamp: Int?
+    let timestamp: TimeInterval?
     let historical: Bool?
-    let base, date: String?
+    let base: String?
+    let date: Date?
     let rates: [String: Double]?
     let error: ErrorData?
 }

@@ -36,10 +36,10 @@ struct ConverterViewModel {
             Loader.shared.hide()
             switch result {
             case .success(let value):
-                if value?.success == true {
+                if value.success == true {
                     self.latestValue.accept(value)
                 } else {
-                    self.errorData.accept(value?.error)
+                    self.errorData.accept(value.error)
                 }
             case .failure(let error):
                 self.errorData.accept(error.error)
