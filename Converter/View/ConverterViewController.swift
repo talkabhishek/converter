@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ConverterViewController: UIViewController {
+class ConverterViewController: UIViewController, AlertProtocol {
     // MARK: - Instance variables
     @IBOutlet private var fromButton: UIButton!
     @IBOutlet private var toButton: UIButton!
@@ -17,6 +17,7 @@ class ConverterViewController: UIViewController {
     @IBOutlet private var toTextField: UITextField!
     @IBOutlet private var swapButton: UIButton!
     @IBOutlet private var detailsButton: UIButton!
+
     lazy var viewModel: ConverterViewModel = {
         let viewModel = ConverterViewModel()
         return viewModel
@@ -28,103 +29,88 @@ class ConverterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        title = "Converter"~
         hideKeyboardWhenTappedAround()
         setupObserver()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         //viewModel.getLatestValues()
-        //viewModel.getHistoricalValues()
     }
 
     // MARK: User Defined function
     private func setupObserver() {
-        // Observe API response
-        viewModel.latestValue.asObservable()
-            .subscribe(onNext: { [unowned self] value in
-                self.updateView(value: value)
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.historicalValue.asObservable()
-            .subscribe(onNext: { [unowned self] value in
-                self.updateView(value: value)
-            })
-            .disposed(by: disposeBag)
-
         // Observe From & To Button
         viewModel.fromButtonValue
             .bind(to: fromButton.rx.title())
             .disposed(by: disposeBag)
-        fromButton
-            .rx
-            .tap
+        fromButton.rx.tap
             .asObservable()
             .subscribe(onNext: { [unowned self] _ in
                 self.showDropdown(source: self.fromButton,
-                                  dataSource: self.viewModel.currienties.value)
-          })
-          .disposed(by: disposeBag)
+                                  dataSource: self.viewModel.currienties)
+            })
+            .disposed(by: disposeBag)
 
         viewModel.toButtonValue
             .bind(to: toButton.rx.title())
             .disposed(by: disposeBag)
-        toButton
-            .rx
-            .tap
+        toButton.rx.tap
             .asObservable()
             .subscribe(onNext: { [unowned self] _ in
                 self.showDropdown(source: self.toButton,
-                                  dataSource: self.viewModel.currienties.value)
-          })
-          .disposed(by: disposeBag)
+                                  dataSource: self.viewModel.currienties)
+            })
+            .disposed(by: disposeBag)
 
         // Observe Swap Button
-        swapButton
-            .rx
-            .tap
+        swapButton.rx.tap
             .asObservable()
             .subscribe(onNext: { [unowned self] _ in
-                guard self.viewModel.fromButtonValue.value != "From" &&
-                        self.viewModel.toButtonValue.value != "To" else {
-                    return
-                }
-                let swapValue = self.viewModel.fromButtonValue.value
-                self.viewModel.fromButtonValue.accept(self.viewModel.toButtonValue.value)
-                self.viewModel.toButtonValue.accept(swapValue)
-          })
-          .disposed(by: disposeBag)
+                self.viewModel.swapSymbols()
+            })
+            .disposed(by: disposeBag)
 
         // Observer Textfield change
-        viewModel.fromFieldValue.observe(on: MainScheduler.asyncInstance)
-            .bind(to: fromTextField.rx.text)
-            .disposed(by: disposeBag)
-        fromTextField
-            .rx
-            .text
+        bind(textField: fromTextField, to: viewModel.fromFieldValue)
+        fromTextField.rx.text
             .observe(on: MainScheduler.asyncInstance)
             .map { [unowned self] value in
                 self.viewModel.setTo(fromValue: value)
             }.subscribe()
-          .disposed(by: disposeBag)
-
-        viewModel.toFieldValue.observe(on: MainScheduler.asyncInstance)
-            .bind(to: toTextField.rx.text)
             .disposed(by: disposeBag)
-        toTextField
-            .rx
-            .text
+
+        bind(textField: toTextField, to: viewModel.toFieldValue)
+        toTextField.rx.text
             .observe(on: MainScheduler.asyncInstance)
             .map { [unowned self] value in
                 self.viewModel.setFrom(toValue: value)
             }.subscribe()
-          .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
 
+        // Observe Error
+        viewModel.errorData
+            .asObservable()
+            .subscribe(onNext: { [unowned self] value in
+                guard let error = value else {
+                    return
+                }
+                self.presentAlert(title: nil, message: error.info)
+            })
+            .disposed(by: disposeBag)
+
+        // Observe Detail tap
+        detailsButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.showDetails()
+            })
+            .disposed(by: disposeBag)
     }
 
-    func updateView(value: ConverterData?) {
-        
+    private func bind(textField: UITextField, to behaviorRelay: BehaviorRelay<String?>) {
+        behaviorRelay.asObservable()
+            .bind(to: textField.rx.text)
+            .disposed(by: disposeBag)
+        textField.rx.text.orEmpty
+            .bind(to: behaviorRelay)
+            .disposed(by: disposeBag)
     }
 
     func showDropdown(source: UIButton, dataSource: [String]) {
@@ -151,6 +137,24 @@ class ConverterViewController: UIViewController {
                 self.viewModel.setFrom(toValue: toValue)
             }
         }).disposed(by: disposeBag)
+    }
+
+    func showDetails() {
+        guard viewModel.fromButtonValue.value != "From" &&
+                viewModel.toButtonValue.value != "To" else {
+            return
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(identifier: DetailsViewController.identifier()) as? DetailsViewController,
+              let baseValueStr = viewModel.fromFieldValue.value,
+              let baseValue = Double(baseValueStr) else {
+            return
+        }
+        viewController.viewModel = DetailsViewModel(
+            fromSymbol: viewModel.fromButtonValue.value,
+            toSymbol: viewModel.toButtonValue.value,
+            baseValue: baseValue)
+        show(viewController, sender: self)
     }
 
 }

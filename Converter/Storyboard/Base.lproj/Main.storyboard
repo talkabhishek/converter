@@ -30,7 +30,7 @@
         <!--Converter-->
         <scene sceneID="5c8-bE-h2O">
             <objects>
-                <viewController storyboardIdentifier="ConverterViewController2" id="2pN-ya-oPW" customClass="ConverterViewController" customModule="Converter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConverterViewController" id="2pN-ya-oPW" customClass="ConverterViewController" customModule="Converter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ylI-Kc-Mw8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,6 +215,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZR-Go-AdL" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1117" y="88"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="3Fs-Gl-1uF">
+            <objects>
+                <viewController storyboardIdentifier="DetailsViewController" id="KIi-7k-eBg" customClass="DetailsViewController" customModule="Converter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YS2-YB-8CT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ETt-3R-QbW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NbY-70-T24" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="88"/>
         </scene>
     </scenes>
     <resources>

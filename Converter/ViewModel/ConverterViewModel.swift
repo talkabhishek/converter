@@ -9,17 +9,21 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct ConverterViewModel: AlertProtocol {
+struct ConverterViewModel {
     // MARK: - Instance variables
-    //let sourceView: SourceViewType?
     let apiServiceManager: APIServiceProtocol
     let latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
-    let historicalValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
-    let currienties: BehaviorRelay<[String]> = BehaviorRelay(value: ["USD", "INR", "ALL", "BCG", "YUN"])
+    let errorData: BehaviorRelay<ErrorData?> = BehaviorRelay(value: nil)
     let fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
     let toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
     let fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     let toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var currienties: [String] {
+        guard let list = latestValue.value?.rates?.keys.sorted() else {
+            return ["USD", "INR", "ALL", "BCG", "YUN"]
+        }
+        return list
+    }
 
     init(apiServiceManager: APIServiceProtocol = APIServiceManager()) {
         self.apiServiceManager = apiServiceManager
@@ -34,34 +38,26 @@ struct ConverterViewModel: AlertProtocol {
             case .success(let value):
                 if value?.success == true {
                     self.latestValue.accept(value)
-                    guard let list = value?.rates?.keys.sorted() else {
-                        return
-                    }
-                    self.currienties.accept(list)
                 } else {
-                    presentAlert(title: nil, message: value?.error?.info)
+                    self.errorData.accept(value?.error)
                 }
             case .failure(let error):
-                presentAlert(title: nil, message: error.error?.info)
+                self.errorData.accept(error.error)
             }
         }
     }
 
-    func getHistoricalValues() {
-        Loader.shared.show()
-        apiServiceManager.getHistorical(date: "2022-04-20", symbols: "USD,AUD", format: "1") { (result) in
-            Loader.shared.hide()
-            switch result {
-            case .success(let value):
-                if value?.success == true {
-                    self.historicalValue.accept(value)
-                } else {
-                    presentAlert(title: nil, message: value?.error?.info)
-                }
-            case .failure(let error):
-                presentAlert(title: nil, message: error.error?.info)
-            }
+    func swapSymbols() {
+        guard fromButtonValue.value != "From" &&
+                toButtonValue.value != "To" else {
+            return
         }
+        let swapSymbol = fromButtonValue.value
+        fromButtonValue.accept(toButtonValue.value)
+        toButtonValue.accept(swapSymbol)
+        let swapValue = fromFieldValue.value
+        fromFieldValue.accept(toFieldValue.value)
+        toFieldValue.accept(swapValue)
     }
 
     func setTo(fromValue: String?) {
@@ -80,13 +76,13 @@ struct ConverterViewModel: AlertProtocol {
         fromFieldValue.accept(fromValue)
     }
 
-    func convert(value: String?, fromSymbol: String, toSymbol: String) -> String {
+    func convert(value: String?, fromSymbol: String, toSymbol: String) -> String? {
         guard let value = value,
               let doubleValue = Double(value),
               let rates = latestValue.value?.rates,
               let fromValue = rates[fromSymbol],
               let toValue = rates[toSymbol] else {
-            return ""
+            return nil
         }
         let result = toValue / fromValue * doubleValue
         return result.twoFractionString

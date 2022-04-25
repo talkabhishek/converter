@@ -5,7 +5,8 @@
   Created by abhisheksingh03 on 23/04/22.
   
 */
-"home_nav" = "Home";
+"Converter" = "Converter";
+"Details" = "Details";
 "Ok" = "Ok";
 "SceneDelegate not available" = "SceneDelegate not available";
 "RootViewController not available" = "RootViewController not available";
