@@ -24,12 +24,8 @@ class DetailsViewController: UIViewController, AlertProtocol, IdentifierProtocol
         // Do any additional setup after loading the view.
         title = "Details"~
         setupObserver()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //viewModel.getLastThreeDaysData()
-        //viewModel.getLatestValues()
+        viewModel.getLastThreeDaysData()
+        viewModel.getLatestValues()
     }
 
     // MARK: User Defined function
@@ -47,7 +43,7 @@ class DetailsViewController: UIViewController, AlertProtocol, IdentifierProtocol
 
         // Observe ChartViewModel
         viewModel.chartViewModel
-            .asObservable()
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] value in
                 chartView.viewModel = value
             })

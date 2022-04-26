@@ -32,7 +32,7 @@ class ConverterViewController: UIViewController, AlertProtocol {
         title = "Converter"~
         hideKeyboardWhenTappedAround()
         setupObserver()
-        //viewModel.getLatestValues()
+        viewModel.getLatestValues()
     }
 
     // MARK: User Defined function

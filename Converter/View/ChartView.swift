@@ -27,7 +27,7 @@ class ChartView: UIView {
     var viewModel: ChartViewModel? {
         didSet {
             toSymbolLabel.text = viewModel?.toSymbol
-            self.setNeedsDisplay()
+            self.setNeedsDisplay(self.frame)
         }
     }
 

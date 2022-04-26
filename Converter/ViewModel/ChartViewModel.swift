@@ -16,6 +16,6 @@ struct ChartViewModel {
             return 0
         }
         let result = 100 / firstVal * value
-        return result
+        return 100 + ((result - 100) * 100)
     }
 }

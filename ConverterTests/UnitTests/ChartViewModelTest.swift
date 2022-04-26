@@ -24,7 +24,7 @@ class ChartViewModelTest: XCTestCase {
     }
 
     func testGetEquatableValue() throws {
-        XCTAssertEqual(viewModel.getEquatableValue(100), 131.57894736842107)
+        XCTAssertEqual(viewModel.getEquatableValue(100), 3257.894736842107)
         viewModel = ChartViewModel(toSymbol: "INR", toValues: [])
         XCTAssertEqual(viewModel.getEquatableValue(100), 0.0)
     }
