@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ConverterViewController: UIViewController, AlertProtocol {
+class ConverterViewController: UIViewController, AlertProtocol, Injectable {
     // MARK: - Instance variables
     @IBOutlet private var fromButton: UIButton!
     @IBOutlet private var toButton: UIButton!
@@ -18,10 +18,10 @@ class ConverterViewController: UIViewController, AlertProtocol {
     @IBOutlet private var swapButton: UIButton!
     @IBOutlet private var detailsButton: UIButton!
 
-    lazy var viewModel: ConverterViewModel = {
-        let viewModel = ConverterViewModel()
-        return viewModel
-    }()
+    typealias Dependencies = HasConverterViewModel
+    var dependencies: Dependencies!
+    lazy var viewModel = dependencies.converterViewModel
+
     private let throttleIntervalInMilliseconds = 100
     private let disposeBag = DisposeBag()
 
@@ -144,17 +144,14 @@ class ConverterViewController: UIViewController, AlertProtocol {
                 viewModel.toButtonValue.value != "To" else {
             return
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let viewController = storyboard.instantiateViewController(identifier: DetailsViewController.identifier()) as? DetailsViewController,
-              let baseValueStr = viewModel.fromFieldValue.value,
+        guard let baseValueStr = viewModel.fromFieldValue.value,
               let baseValue = Double(baseValueStr) else {
             return
         }
-        viewController.viewModel = DetailsViewModel(
-            fromSymbol: viewModel.fromButtonValue.value,
-            toSymbol: viewModel.toButtonValue.value,
-            baseValue: baseValue)
-        show(viewController, sender: self)
+        let dependencies = DetailsModule(fromSymbol: viewModel.fromButtonValue.value, toSymbol: viewModel.toButtonValue.value, baseValue: baseValue)
+        let storyboard = UIStoryboard(.main)
+        let detailsVC: DetailsViewController = storyboard.inflateVC(with: dependencies)
+        show(detailsVC, sender: self)
     }
 
 }

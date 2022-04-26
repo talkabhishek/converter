@@ -9,7 +9,28 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct DetailsViewModel {
+protocol HasDetailsViewModel{
+    var detailsViewModel: DetailsViewModelConformable { get }
+}
+
+protocol DetailsViewModelConformable {
+    var fromSymbol: String { get }
+    var toSymbol: String { get }
+    var baseValue: Double { get }
+    var apiServiceManager: APIServiceProtocol { get }
+    var historicalValues: BehaviorRelay<[ConverterData]> { get }
+    var latestValue: BehaviorRelay<ConverterData?> { get }
+    var errorData: BehaviorRelay<ErrorData?> { get }
+    var chartViewModel: BehaviorRelay<ChartViewModel?> { get }
+    var historicalCellViewModels: BehaviorRelay<[HistoricalCellViewModel]> { get }
+    var currenciesCellViewModels: BehaviorRelay<[CurrenciesCellViewModel]> { get }
+
+    func getHistoricalValues(date: Date)
+    func getLatestValues()
+    func getLastThreeDaysData()
+}
+
+struct DetailsViewModel: DetailsViewModelConformable {
     let fromSymbol: String
     let toSymbol: String
     let baseValue: Double

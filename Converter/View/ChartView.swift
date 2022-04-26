@@ -12,12 +12,10 @@ class ChartView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.lightGray
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = UIColor.lightGray
     }
 
     override func draw(_ rect: CGRect) {
@@ -41,7 +39,7 @@ class ChartView: UIView {
             let value3 = viewModel.getEquatableValue(viewModel.toValues[2])
             path.addLine(to: CGPoint(x: 320, y: value3))
 
-            UIColor.purple.setStroke()
+            UIColor.blue.setStroke()
             path.stroke()
         }
     }

@@ -9,15 +9,35 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct ConverterViewModel {
+protocol HasConverterViewModel{
+    var converterViewModel: ConverterViewModelConformable { get }
+}
+
+protocol ConverterViewModelConformable {
+    var apiServiceManager: APIServiceProtocol { get }
+    var latestValue: BehaviorRelay<ConverterData?> { get }
+    var errorData: BehaviorRelay<ErrorData?> { get }
+    var fromButtonValue: BehaviorRelay<String> { get }
+    var toButtonValue: BehaviorRelay<String> { get }
+    var fromFieldValue: BehaviorRelay<String?> { get }
+    var toFieldValue: BehaviorRelay<String?> { get }
+    var currienties: [String] { get }
+
+    func getLatestValues()
+    func swapSymbols()
+    func setTo(fromValue: String?)
+    func setFrom(toValue: String?)
+}
+
+struct ConverterViewModel: ConverterViewModelConformable {
     // MARK: - Instance variables
-    let apiServiceManager: APIServiceProtocol
-    let latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
-    let errorData: BehaviorRelay<ErrorData?> = BehaviorRelay(value: nil)
-    let fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
-    let toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
-    let fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    let toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var apiServiceManager: APIServiceProtocol
+    var latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
+    var errorData: BehaviorRelay<ErrorData?> = BehaviorRelay(value: nil)
+    var fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
+    var toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
+    var fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var currienties: [String] {
         guard let list = latestValue.value?.rates?.keys.sorted() else {
             return ["USD", "INR"]

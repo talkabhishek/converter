@@ -9,13 +9,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class DetailsViewController: UIViewController, AlertProtocol, IdentifierProtocol {
+class DetailsViewController: UIViewController, AlertProtocol, Injectable {
     // MARK: - Instance variables
     @IBOutlet private var chartView: ChartView!
     @IBOutlet private var historicalTableView: UITableView!
     @IBOutlet private var currenciesTableView: UITableView!
-    
-    var viewModel: DetailsViewModel!
+
+    typealias Dependencies = HasDetailsViewModel
+    var dependencies: Dependencies!
+    lazy var viewModel = dependencies.detailsViewModel
+
     private let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle

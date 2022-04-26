@@ -41,6 +41,9 @@
 		61E4B1212817E579000A01DA /* HistoricalCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B1202817E579000A01DA /* HistoricalCellViewModelTest.swift */; };
 		61E4B1262817E589000A01DA /* CurrenciesCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B1252817E589000A01DA /* CurrenciesCellViewModelTest.swift */; };
 		61E4B12B2817E59A000A01DA /* ChartViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B12A2817E59A000A01DA /* ChartViewModelTest.swift */; };
+		61E4B13528180DF0000A01DA /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B13428180DF0000A01DA /* UIStoryboardExtension.swift */; };
+		61E4B13A28180E52000A01DA /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B13928180E52000A01DA /* Injectable.swift */; };
+		61E4B13F28181734000A01DA /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B13E28181734000A01DA /* AppModule.swift */; };
 		61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E492813CBED009112A1 /* AppDelegate.swift */; };
 		61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4B2813CBED009112A1 /* SceneDelegate.swift */; };
 		61E78E4E2813CBED009112A1 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4D2813CBED009112A1 /* ConverterViewController.swift */; };
@@ -110,6 +113,9 @@
 		61E4B1202817E579000A01DA /* HistoricalCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCellViewModelTest.swift; sourceTree = "<group>"; };
 		61E4B1252817E589000A01DA /* CurrenciesCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesCellViewModelTest.swift; sourceTree = "<group>"; };
 		61E4B12A2817E59A000A01DA /* ChartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModelTest.swift; sourceTree = "<group>"; };
+		61E4B13428180DF0000A01DA /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		61E4B13928180E52000A01DA /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
+		61E4B13E28181734000A01DA /* AppModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
 		61E78E462813CBED009112A1 /* Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Converter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E78E492813CBED009112A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E78E4B2813CBED009112A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 			children = (
 				61E78E492813CBED009112A1 /* AppDelegate.swift */,
 				61E78E4B2813CBED009112A1 /* SceneDelegate.swift */,
+				61E4B13E28181734000A01DA /* AppModule.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -245,6 +252,7 @@
 			children = (
 				6151A2B92814607D0044E1C4 /* AlertProtocol.swift */,
 				619257F52816748B002B45A0 /* IdentifierProtocol.swift */,
+				61E4B13928180E52000A01DA /* Injectable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 				61A2A0312815AE530056BDA1 /* DoubleExtension.swift */,
 				6192581928169B57002B45A0 /* DateFormatterExtension.swift */,
 				6192581E28169DE8002B45A0 /* DateExtension.swift */,
+				61E4B13428180DF0000A01DA /* UIStoryboardExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -659,6 +668,7 @@
 				61E78EB32813DE4A009112A1 /* Environment.swift in Sources */,
 				61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */,
 				6192581F28169DE8002B45A0 /* DateExtension.swift in Sources */,
+				61E4B13A28180E52000A01DA /* Injectable.swift in Sources */,
 				61E4B0B52817AB3C000A01DA /* ChartView.swift in Sources */,
 				61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */,
 				6151A292281446620044E1C4 /* APIServiceManager.swift in Sources */,
@@ -670,7 +680,9 @@
 				61E78EDF28140EA6009112A1 /* UIViewExtension.swift in Sources */,
 				61E78EC32813E3CC009112A1 /* Postfix.swift in Sources */,
 				6151A2AC28144BA70044E1C4 /* ConverterData.swift in Sources */,
+				61E4B13F28181734000A01DA /* AppModule.swift in Sources */,
 				619257E92816541D002B45A0 /* DetailsViewController.swift in Sources */,
+				61E4B13528180DF0000A01DA /* UIStoryboardExtension.swift in Sources */,
 				619258252816AD46002B45A0 /* HistoricalViewCell.swift in Sources */,
 				6151A2BA2814607D0044E1C4 /* AlertProtocol.swift in Sources */,
 				6151A28E281446620044E1C4 /* APIService.swift in Sources */,
