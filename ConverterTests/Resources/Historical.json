@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "timestamp": 1650499199,
+    "historical": true,
+    "base": "EUR",
+    "date": "2022-04-20",
+    "rates": {
+        "USD": 1.084951,
+        "AUD": 1.457289,
+        "CAD": 1.354849,
+        "PLN": 4.640499,
+        "MXN": 21.686766
+    }
+}

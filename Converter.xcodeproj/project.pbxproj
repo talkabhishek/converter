@@ -31,6 +31,16 @@
 		61A2A0322815AE530056BDA1 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2A0312815AE530056BDA1 /* DoubleExtension.swift */; };
 		61E4B0B52817AB3C000A01DA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0B42817AB3C000A01DA /* ChartView.swift */; };
 		61E4B0BA2817B828000A01DA /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0B92817B828000A01DA /* ChartViewModel.swift */; };
+		61E4B0EC2817CDD3000A01DA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0EB2817CDD3000A01DA /* Utilities.swift */; };
+		61E4B0F72817CE67000A01DA /* APIServiceProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0F62817CE67000A01DA /* APIServiceProtocolMock.swift */; };
+		61E4B1002817CF34000A01DA /* Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 61E4B0FE2817CF34000A01DA /* Latest.json */; };
+		61E4B1012817CF34000A01DA /* Historical.json in Resources */ = {isa = PBXBuildFile; fileRef = 61E4B0FF2817CF34000A01DA /* Historical.json */; };
+		61E4B10C2817CF56000A01DA /* Error.json in Resources */ = {isa = PBXBuildFile; fileRef = 61E4B10B2817CF56000A01DA /* Error.json */; };
+		61E4B1172817D26C000A01DA /* ConverterViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B1162817D26C000A01DA /* ConverterViewModelTest.swift */; };
+		61E4B11C2817D2D3000A01DA /* DetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B11B2817D2D3000A01DA /* DetailsViewModelTest.swift */; };
+		61E4B1212817E579000A01DA /* HistoricalCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B1202817E579000A01DA /* HistoricalCellViewModelTest.swift */; };
+		61E4B1262817E589000A01DA /* CurrenciesCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B1252817E589000A01DA /* CurrenciesCellViewModelTest.swift */; };
+		61E4B12B2817E59A000A01DA /* ChartViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B12A2817E59A000A01DA /* ChartViewModelTest.swift */; };
 		61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E492813CBED009112A1 /* AppDelegate.swift */; };
 		61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4B2813CBED009112A1 /* SceneDelegate.swift */; };
 		61E78E4E2813CBED009112A1 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4D2813CBED009112A1 /* ConverterViewController.swift */; };
@@ -90,6 +100,16 @@
 		61A2A0312815AE530056BDA1 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		61E4B0B42817AB3C000A01DA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		61E4B0B92817B828000A01DA /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		61E4B0EB2817CDD3000A01DA /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		61E4B0F62817CE67000A01DA /* APIServiceProtocolMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceProtocolMock.swift; sourceTree = "<group>"; };
+		61E4B0FE2817CF34000A01DA /* Latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Latest.json; sourceTree = "<group>"; };
+		61E4B0FF2817CF34000A01DA /* Historical.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Historical.json; sourceTree = "<group>"; };
+		61E4B10B2817CF56000A01DA /* Error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
+		61E4B1162817D26C000A01DA /* ConverterViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModelTest.swift; sourceTree = "<group>"; };
+		61E4B11B2817D2D3000A01DA /* DetailsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelTest.swift; sourceTree = "<group>"; };
+		61E4B1202817E579000A01DA /* HistoricalCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCellViewModelTest.swift; sourceTree = "<group>"; };
+		61E4B1252817E589000A01DA /* CurrenciesCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesCellViewModelTest.swift; sourceTree = "<group>"; };
+		61E4B12A2817E59A000A01DA /* ChartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModelTest.swift; sourceTree = "<group>"; };
 		61E78E462813CBED009112A1 /* Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Converter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E78E492813CBED009112A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E78E4B2813CBED009112A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -240,6 +260,44 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		61E4B0EA2817CDD3000A01DA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				61E4B0EB2817CDD3000A01DA /* Utilities.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		61E4B0F02817CDD7000A01DA /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				61E4B0F62817CE67000A01DA /* APIServiceProtocolMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		61E4B0F42817CDDE000A01DA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				61E4B0FE2817CF34000A01DA /* Latest.json */,
+				61E4B0FF2817CF34000A01DA /* Historical.json */,
+				61E4B10B2817CF56000A01DA /* Error.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		61E4B0F52817CDF5000A01DA /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				61E4B1162817D26C000A01DA /* ConverterViewModelTest.swift */,
+				61E4B11B2817D2D3000A01DA /* DetailsViewModelTest.swift */,
+				61E4B12A2817E59A000A01DA /* ChartViewModelTest.swift */,
+				61E4B1202817E579000A01DA /* HistoricalCellViewModelTest.swift */,
+				61E4B1252817E589000A01DA /* CurrenciesCellViewModelTest.swift */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
 		61E78E3D2813CBED009112A1 = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +341,10 @@
 		61E78E5F2813CBF1009112A1 /* ConverterTests */ = {
 			isa = PBXGroup;
 			children = (
+				61E4B0F52817CDF5000A01DA /* UnitTests */,
+				61E4B0F02817CDD7000A01DA /* Mocks */,
+				61E4B0EA2817CDD3000A01DA /* Helper */,
+				61E4B0F42817CDDE000A01DA /* Resources */,
 				61E78E602813CBF1009112A1 /* ConverterTests.swift */,
 				61E78E622813CBF1009112A1 /* Info.plist */,
 			);
@@ -465,6 +527,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E4B10C2817CF56000A01DA /* Error.json in Resources */,
+				61E4B1002817CF34000A01DA /* Latest.json in Resources */,
+				61E4B1012817CF34000A01DA /* Historical.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,7 +685,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E4B0EC2817CDD3000A01DA /* Utilities.swift in Sources */,
+				61E4B12B2817E59A000A01DA /* ChartViewModelTest.swift in Sources */,
+				61E4B0F72817CE67000A01DA /* APIServiceProtocolMock.swift in Sources */,
+				61E4B1212817E579000A01DA /* HistoricalCellViewModelTest.swift in Sources */,
 				61E78E612813CBF1009112A1 /* ConverterTests.swift in Sources */,
+				61E4B11C2817D2D3000A01DA /* DetailsViewModelTest.swift in Sources */,
+				61E4B1172817D26C000A01DA /* ConverterViewModelTest.swift in Sources */,
+				61E4B1262817E589000A01DA /* CurrenciesCellViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

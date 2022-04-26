@@ -20,7 +20,7 @@ struct ConverterViewModel {
     let toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var currienties: [String] {
         guard let list = latestValue.value?.rates?.keys.sorted() else {
-            return ["USD", "INR", "ALL", "BCG", "YUN"]
+            return ["USD", "INR"]
         }
         return list
     }
