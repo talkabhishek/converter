@@ -22,7 +22,7 @@ class TopCurrenciesViewController: UIViewController, AlertProtocol {
 
         // Do any additional setup after loading the view.
         setupObserver()
-        //viewModel.getLatestValues()
+        viewModel.getLatestValues()
     }
 
     // MARK: User Defined function

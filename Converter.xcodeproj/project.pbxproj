@@ -33,6 +33,8 @@
 		6192582F2816C3AD002B45A0 /* HistoricalCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6192582E2816C3AD002B45A0 /* HistoricalCellViewModel.swift */; };
 		6192583A2816D219002B45A0 /* CurrenciesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619258392816D219002B45A0 /* CurrenciesCellViewModel.swift */; };
 		61A2A0322815AE530056BDA1 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2A0312815AE530056BDA1 /* DoubleExtension.swift */; };
+		61E4B0B52817AB3C000A01DA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0B42817AB3C000A01DA /* ChartView.swift */; };
+		61E4B0BA2817B828000A01DA /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4B0B92817B828000A01DA /* ChartViewModel.swift */; };
 		61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E492813CBED009112A1 /* AppDelegate.swift */; };
 		61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4B2813CBED009112A1 /* SceneDelegate.swift */; };
 		61E78E4E2813CBED009112A1 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E78E4D2813CBED009112A1 /* ConverterViewController.swift */; };
@@ -94,6 +96,8 @@
 		6192582E2816C3AD002B45A0 /* HistoricalCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCellViewModel.swift; sourceTree = "<group>"; };
 		619258392816D219002B45A0 /* CurrenciesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesCellViewModel.swift; sourceTree = "<group>"; };
 		61A2A0312815AE530056BDA1 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		61E4B0B42817AB3C000A01DA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		61E4B0B92817B828000A01DA /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		61E78E462813CBED009112A1 /* Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Converter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E78E492813CBED009112A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E78E4B2813CBED009112A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			children = (
 				61E78E4D2813CBED009112A1 /* ConverterViewController.swift */,
 				619257E82816541D002B45A0 /* DetailsViewController.swift */,
+				61E4B0B42817AB3C000A01DA /* ChartView.swift */,
 				61925805281691C6002B45A0 /* HistoricalListViewController.swift */,
 				619258242816AD46002B45A0 /* HistoricalViewCell.swift */,
 				6192580A281691F5002B45A0 /* TopCurrenciesViewController.swift */,
@@ -198,6 +203,7 @@
 			children = (
 				6151A25D2814177E0044E1C4 /* ConverterViewModel.swift */,
 				619257ED2816542F002B45A0 /* DetailsViewModel.swift */,
+				61E4B0B92817B828000A01DA /* ChartViewModel.swift */,
 				6192580F28169323002B45A0 /* HistoricalListViewModel.swift */,
 				6192582E2816C3AD002B45A0 /* HistoricalCellViewModel.swift */,
 				6192581428169335002B45A0 /* TopCurrenciesViewModel.swift */,
@@ -600,9 +606,11 @@
 				61E78EB32813DE4A009112A1 /* Environment.swift in Sources */,
 				61E78E4A2813CBED009112A1 /* AppDelegate.swift in Sources */,
 				6192581F28169DE8002B45A0 /* DateExtension.swift in Sources */,
+				61E4B0B52817AB3C000A01DA /* ChartView.swift in Sources */,
 				61E78E4C2813CBED009112A1 /* SceneDelegate.swift in Sources */,
 				6151A292281446620044E1C4 /* APIServiceManager.swift in Sources */,
 				6192581A28169B57002B45A0 /* DateFormatterExtension.swift in Sources */,
+				61E4B0BA2817B828000A01DA /* ChartViewModel.swift in Sources */,
 				6184DE3A2815423F00838059 /* DropdownView.swift in Sources */,
 				619257F62816748B002B45A0 /* IdentifierProtocol.swift in Sources */,
 				6151A291281446620044E1C4 /* APIServiceManagerExtensionBasic.swift in Sources */,

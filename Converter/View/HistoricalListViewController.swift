@@ -22,7 +22,7 @@ class HistoricalListViewController: UIViewController, AlertProtocol {
         
         // Do any additional setup after loading the view.
         setupObserver()
-        //viewModel.getLastThreeDaysData()
+        viewModel.getLastThreeDaysData()
 
     }
 
