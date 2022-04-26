@@ -32,21 +32,6 @@ class DetailsViewController: UIViewController, AlertProtocol, IdentifierProtocol
         //viewModel.getLatestValues()
     }
 
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? HistoricalListViewController {
-            viewController.viewModel = HistoricalListViewModel(
-                fromSymbol: viewModel.fromSymbol,
-                toSymbol: viewModel.toSymbol,
-                baseValue: viewModel.baseValue)
-        } else if let viewController = segue.destination as? TopCurrenciesViewController {
-            viewController.viewModel = TopCurrenciesViewModel(
-                fromSymbol: viewModel.fromSymbol,
-                toSymbol: viewModel.toSymbol,
-                baseValue: viewModel.baseValue)
-        }
-    }
-
     // MARK: User Defined function
     private func setupObserver() {
         // Observe Error
