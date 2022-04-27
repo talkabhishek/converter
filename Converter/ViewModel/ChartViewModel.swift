@@ -17,6 +17,6 @@ struct ChartViewModel {
         }
         let result = 100 / firstVal * value
         let equatable = 100 + ((result - 100) * 100)
-        return min(max(equatable, 0.0), 250.0)
+        return min(max(equatable, 10.0), 190.0)
     }
 }

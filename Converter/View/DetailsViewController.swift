@@ -69,7 +69,8 @@ class DetailsViewController: UIViewController, AlertProtocol, Injectable {
 
         // Setup HistoricalCellConfiguration
         viewModel.historicalCellViewModels
-          .bind(to: historicalTableView
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(to: historicalTableView
             .rx
             .items(cellIdentifier: HistoricalViewCell.identifier(),
                    cellType: HistoricalViewCell.self)) {
@@ -80,7 +81,8 @@ class DetailsViewController: UIViewController, AlertProtocol, Injectable {
 
         // Setup CurrenciesCellConfiguration
         viewModel.currenciesCellViewModels
-          .bind(to: currenciesTableView
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(to: currenciesTableView
             .rx
             .items(cellIdentifier: CurrenciesViewCell.identifier(),
                    cellType: CurrenciesViewCell.self)) {
