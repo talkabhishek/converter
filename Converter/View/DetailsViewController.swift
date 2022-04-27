@@ -40,7 +40,7 @@ class DetailsViewController: UIViewController, AlertProtocol, Injectable {
     private func setupObserver() {
         // Observe Error
         viewModel.errorData
-            .asObservable()
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] value in
                 guard let error = value else {
                     return

@@ -87,7 +87,7 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
 
         // Observe Error
         viewModel.errorData
-            .asObservable()
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] value in
                 guard let error = value else {
                     return
