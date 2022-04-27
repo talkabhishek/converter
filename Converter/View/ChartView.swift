@@ -9,6 +9,7 @@ import UIKit
 
 class ChartView: UIView {
     @IBOutlet private var toSymbolLabel: UILabel!
+    @IBOutlet private var toValuesLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +25,12 @@ class ChartView: UIView {
 
     var viewModel: ChartViewModel? {
         didSet {
-            toSymbolLabel.text = viewModel?.toSymbol
+            guard let viewModel = viewModel else {
+                return
+            }
+            toSymbolLabel.text = viewModel.toSymbol
+            let values = viewModel.toValues.map { $0.twoFractionString }
+            toValuesLabel.text = values.joined(separator: ", ")
             self.setNeedsDisplay(self.frame)
         }
     }

@@ -209,9 +209,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Suu-Az-JcD" customClass="ChartView" customModule="Converter" customModuleProvider="target">
                                 <rect key="frame" x="10" y="54" width="394" height="200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BY1-H0-ZKU">
-                                        <rect key="frame" x="20" y="90" width="34.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BY1-H0-ZKU">
+                                        <rect key="frame" x="20" y="90" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-RP-jAp">
+                                        <rect key="frame" x="20" y="92" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -219,7 +225,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="BY1-H0-ZKU" firstAttribute="top" secondItem="Suu-Az-JcD" secondAttribute="top" constant="90" id="3Mf-fD-77L"/>
+                                    <constraint firstItem="6q1-RP-jAp" firstAttribute="leading" secondItem="Suu-Az-JcD" secondAttribute="leading" constant="20" id="Rso-Wl-PGA"/>
                                     <constraint firstAttribute="height" constant="200" id="bGv-a6-ZPC"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6q1-RP-jAp" secondAttribute="trailing" constant="20" symbolic="YES" id="hJb-MR-dsM"/>
+                                    <constraint firstItem="6q1-RP-jAp" firstAttribute="top" secondItem="BY1-H0-ZKU" secondAttribute="bottom" constant="2" id="qfi-qW-whv"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BY1-H0-ZKU" secondAttribute="trailing" constant="20" symbolic="YES" id="vPr-ZZ-Uak"/>
                                     <constraint firstItem="BY1-H0-ZKU" firstAttribute="leading" secondItem="Suu-Az-JcD" secondAttribute="leading" constant="20" id="zLr-gW-XJK"/>
                                 </constraints>
@@ -236,6 +245,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="toSymbolLabel" destination="BY1-H0-ZKU" id="g3P-YI-3au"/>
+                                    <outlet property="toValuesLabel" destination="6q1-RP-jAp" id="5jp-J0-y1o"/>
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Ai-OY-IVN">

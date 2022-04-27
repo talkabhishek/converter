@@ -21,6 +21,7 @@ protocol DetailsViewModelConformable {
     var historicalValues: BehaviorRelay<[ConverterData]> { get }
     var latestValue: BehaviorRelay<ConverterData?> { get }
     var errorData: BehaviorRelay<ErrorData?> { get }
+    var apiResponseCount: BehaviorRelay<Int> { get }
     var chartViewModel: BehaviorRelay<ChartViewModel?> { get }
     var historicalCellViewModels: BehaviorRelay<[HistoricalCellViewModel]> { get }
     var currenciesCellViewModels: BehaviorRelay<[CurrenciesCellViewModel]> { get }
@@ -38,6 +39,7 @@ struct DetailsViewModel: DetailsViewModelConformable {
     let historicalValues: BehaviorRelay<[ConverterData]> = BehaviorRelay(value: [])
     let latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
     let errorData: BehaviorRelay<ErrorData?> = BehaviorRelay(value: nil)
+    var apiResponseCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     let chartViewModel: BehaviorRelay<ChartViewModel?> = BehaviorRelay(value: nil)
     let historicalCellViewModels: BehaviorRelay<[HistoricalCellViewModel]> = BehaviorRelay(value: [])
     let currenciesCellViewModels: BehaviorRelay<[CurrenciesCellViewModel]> = BehaviorRelay(value: [])
@@ -56,6 +58,7 @@ struct DetailsViewModel: DetailsViewModelConformable {
         apiServiceManager.getHistorical(date: dateStr,
                                         symbols: "\(fromSymbol),\(toSymbol)",
                                         format: "1") { (result) in
+            self.apiResponseCount.accept(self.apiResponseCount.value + 1)
             switch result {
             case .success(let value):
                 if value.success == true {
@@ -75,9 +78,8 @@ struct DetailsViewModel: DetailsViewModelConformable {
     }
 
     func getLatestValues() {
-        Loader.shared.show()
         apiServiceManager.getLatest(symbols: "", format: "") { (result) in
-            Loader.shared.hide()
+            self.apiResponseCount.accept(self.apiResponseCount.value + 1)
             switch result {
             case .success(let value):
                 if value.success == true {

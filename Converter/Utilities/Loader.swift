@@ -43,7 +43,7 @@ class Loader {
         indicator.centerYAnchor.constraint(equalTo: backView.centerYAnchor, constant: 0).isActive = true
     }
 
-    func show() {
+    private func addLoader() {
         rootController.view.addSubview(backView)
         backView.translatesAutoresizingMaskIntoConstraints = false
         backView.heightAnchor.constraint(equalToConstant: 100).isActive = true
@@ -53,8 +53,16 @@ class Loader {
         indicator.startAnimating()
     }
 
+    func show() {
+        DispatchQueue.main.async {
+            self.addLoader()
+        }
+    }
+
     func hide() {
-        self.indicator.stopAnimating()
-        self.backView.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.indicator.stopAnimating()
+            self.backView.removeFromSuperview()
+        }
     }
 }

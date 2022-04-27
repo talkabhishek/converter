@@ -27,6 +27,11 @@ class DetailsViewController: UIViewController, AlertProtocol, Injectable {
         // Do any additional setup after loading the view.
         title = "Details"~
         setupObserver()
+        Loader.shared.show()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.getLastThreeDaysData()
         viewModel.getLatestValues()
     }
@@ -41,6 +46,16 @@ class DetailsViewController: UIViewController, AlertProtocol, Injectable {
                     return
                 }
                 self.presentAlert(title: nil, message: error.info)
+            })
+            .disposed(by: disposeBag)
+
+        // Observe API response count for loader
+        viewModel.apiResponseCount
+            .asObservable()
+            .subscribe(onNext: { value in
+                if value == 4 {
+                    Loader.shared.hide()
+                }
             })
             .disposed(by: disposeBag)
 
