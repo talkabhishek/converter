@@ -127,7 +127,7 @@ struct DetailsViewModel: DetailsViewModelConformable {
         guard let converterData = latestValue.value else {
             return
         }
-        var top12List = ["CAD", "USD", "CHF", "EUR", "GBP", "JOD", "OMR", "KWD", "KYD", "BHD", "INR", "CNY"]
+        var top12List = ["EGP", "CAD", "USD", "CHF", "EUR", "GBP", "JOD", "OMR", "KWD", "KYD", "BHD", "INR", "CNY"]
         if let fromIndex = top12List.firstIndex(of: fromSymbol) {
             top12List.remove(at: fromIndex)
         }

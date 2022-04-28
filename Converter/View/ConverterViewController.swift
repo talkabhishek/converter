@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ConverterViewController: UIViewController, AlertProtocol, Injectable {
+class ConverterViewController: BaseViewController, Injectable {
     // MARK: - Instance variables
     @IBOutlet private var fromButton: UIButton!
     @IBOutlet private var toButton: UIButton!
@@ -17,6 +17,7 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
     @IBOutlet private var toTextField: UITextField!
     @IBOutlet private var swapButton: UIButton!
     @IBOutlet private var detailsButton: UIButton!
+    let dropdown = DropdownView()
 
     typealias Dependencies = HasConverterViewModel
     var dependencies: Dependencies!
@@ -37,6 +38,22 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
 
     // MARK: User Defined function
     private func setupObserver() {
+        // Observe Dropdown selection
+        dropdown.selectedItem.asObservable().subscribe(onNext: { [unowned self] value in
+            guard let value = value else {
+                return
+            }
+            if self.dropdown.sourceView == self.fromButton {
+                self.viewModel.fromButtonValue.accept(value)
+                let fromValue = self.viewModel.fromFieldValue.value
+                self.viewModel.setTo(fromValue: fromValue)
+            } else {
+                self.viewModel.toButtonValue.accept(value)
+                let toValue = self.viewModel.toFieldValue.value
+                self.viewModel.setFrom(toValue: toValue)
+            }
+        }).disposed(by: disposeBag)
+
         // Observe From & To Button
         viewModel.fromButtonValue
             .bind(to: fromButton.rx.title())
@@ -45,7 +62,7 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
             .asObservable()
             .subscribe(onNext: { [unowned self] _ in
                 self.showDropdown(source: self.fromButton,
-                                  dataSource: self.viewModel.currienties)
+                                  dataSource: self.viewModel.currencies)
             })
             .disposed(by: disposeBag)
 
@@ -56,7 +73,7 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
             .asObservable()
             .subscribe(onNext: { [unowned self] _ in
                 self.showDropdown(source: self.toButton,
-                                  dataSource: self.viewModel.currienties)
+                                  dataSource: self.viewModel.currencies)
             })
             .disposed(by: disposeBag)
 
@@ -72,17 +89,19 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
         bind(textField: fromTextField, to: viewModel.fromFieldValue)
         fromTextField.rx.text
             .observe(on: MainScheduler.asyncInstance)
-            .map { [unowned self] value in
+            .throttle(.milliseconds(throttleIntervalInMilliseconds), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] value in
                 self.viewModel.setTo(fromValue: value)
-            }.subscribe()
+            })
             .disposed(by: disposeBag)
 
         bind(textField: toTextField, to: viewModel.toFieldValue)
         toTextField.rx.text
             .observe(on: MainScheduler.asyncInstance)
-            .map { [unowned self] value in
+            .throttle(.milliseconds(throttleIntervalInMilliseconds), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] value in
                 self.viewModel.setFrom(toValue: value)
-            }.subscribe()
+            })
             .disposed(by: disposeBag)
 
         // Observe Error
@@ -114,7 +133,6 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
     }
 
     func showDropdown(source: UIButton, dataSource: [String]) {
-        let dropdown = DropdownView(list: dataSource, source: source)
         self.view.addSubview(dropdown)
         dropdown.translatesAutoresizingMaskIntoConstraints = false
         dropdown.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
@@ -122,21 +140,7 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
         dropdown.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
         dropdown.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
 
-        dropdown.showDropdown()
-        dropdown.selectedItem.asObservable().subscribe(onNext: { value in
-            guard let value = value else {
-                return
-            }
-            if source == self.fromButton {
-                self.viewModel.fromButtonValue.accept(value)
-                let fromValue = self.viewModel.fromFieldValue.value
-                self.viewModel.setTo(fromValue: fromValue)
-            } else {
-                self.viewModel.toButtonValue.accept(value)
-                let toValue = self.viewModel.toFieldValue.value
-                self.viewModel.setFrom(toValue: toValue)
-            }
-        }).disposed(by: disposeBag)
+        dropdown.showDropdown(list: dataSource, source: source)
     }
 
     func showDetails() {
@@ -154,16 +158,4 @@ class ConverterViewController: UIViewController, AlertProtocol, Injectable {
         show(detailsVC, sender: self)
     }
 
-}
-
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
 }

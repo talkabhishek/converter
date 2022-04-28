@@ -23,12 +23,12 @@ class ConverterViewModelTest: XCTestCase {
     }
 
     func testCurrencies() throws {
-        XCTAssertEqual(viewModel.currienties.count, 2)
+        XCTAssertEqual(viewModel.currencies.count, 2)
         guard let response = Utilities.readJSON("Latest", type: ConverterData.self) else {
             return
         }
         viewModel.latestValue.accept(response)
-        XCTAssertEqual(viewModel.currienties.count, 168)
+        XCTAssertEqual(viewModel.currencies.count, 168)
     }
 
     func testGetLatestValues() throws {

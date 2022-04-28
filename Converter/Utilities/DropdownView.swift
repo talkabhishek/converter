@@ -13,17 +13,15 @@ class DropdownView: UIView {
     private let transparentView = UIView()
     private let tableView = UITableView()
 
-    private let dataSource :[String]
-    private let sourceView: UIView
-    let selectedItem: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    private (set) var dataSource :[String]!
+    private (set) var sourceView: UIView!
+    let selectedItem: PublishRelay<String?> = PublishRelay()
     var firstWindow: UIWindow? {
         return UIApplication.shared.windows.first { $0.isKeyWindow }
     }
 
-    init(list: [String], source: UIView) {
+    init() {
         // Setup Dropdown View
-        dataSource = list
-        sourceView = source
         super.init(frame: CGRect.zero)
         // Setup Table View
         tableView.delegate = self
@@ -35,11 +33,9 @@ class DropdownView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func showDropdown() {
-        addTransparentView()
-    }
-
-    private func addTransparentView() {
+    func showDropdown(list: [String], source: UIView) {
+        dataSource = list
+        sourceView = source
         guard let firstWindow = firstWindow else { return }
         self.addSubview(transparentView)
         transparentView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,11 +46,11 @@ class DropdownView: UIView {
 
         self.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.leadingAnchor.constraint(equalTo: sourceView.leadingAnchor, constant: 0).isActive = true
-        tableView.topAnchor.constraint(equalTo: sourceView.topAnchor, constant: 42).isActive = true
-        tableView.widthAnchor.constraint(equalTo: sourceView.widthAnchor, constant: 0).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: source.leadingAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: source.topAnchor, constant: 42).isActive = true
+        tableView.widthAnchor.constraint(equalTo: source.widthAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(lessThanOrEqualTo: firstWindow.bottomAnchor, constant: -50).isActive = true
-        let heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(dataSource.count * 50))
+        let heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(list.count * 50))
         heightConstraint.priority = .defaultLow
         heightConstraint.isActive = true
 

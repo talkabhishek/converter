@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class DetailsViewController: UIViewController, AlertProtocol, Injectable {
+class DetailsViewController: BaseViewController, Injectable {
     // MARK: - Instance variables
     @IBOutlet private var chartView: ChartView!
     @IBOutlet private var historicalTableView: UITableView!

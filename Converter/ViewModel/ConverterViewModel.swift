@@ -21,7 +21,7 @@ protocol ConverterViewModelConformable {
     var toButtonValue: BehaviorRelay<String> { get }
     var fromFieldValue: BehaviorRelay<String?> { get }
     var toFieldValue: BehaviorRelay<String?> { get }
-    var currienties: [String] { get }
+    var currencies: [String] { get }
 
     func getLatestValues()
     func swapSymbols()
@@ -38,9 +38,9 @@ struct ConverterViewModel: ConverterViewModelConformable {
     var toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
     var fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    var currienties: [String] {
+    var currencies: [String] {
         guard let list = latestValue.value?.rates?.keys.sorted() else {
-            return ["USD", "INR"]
+            return ["USD", "EGP", "INR"]
         }
         return list
     }
@@ -75,9 +75,10 @@ struct ConverterViewModel: ConverterViewModelConformable {
         let swapSymbol = fromButtonValue.value
         fromButtonValue.accept(toButtonValue.value)
         toButtonValue.accept(swapSymbol)
-        let swapValue = fromFieldValue.value
-        fromFieldValue.accept(toFieldValue.value)
-        toFieldValue.accept(swapValue)
+        let fromValue = fromFieldValue.value
+        let toValue = toFieldValue.value
+        fromFieldValue.accept(toValue)
+        toFieldValue.accept(fromValue)
     }
 
     func setTo(fromValue: String?) {

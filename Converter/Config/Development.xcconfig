@@ -15,7 +15,7 @@ APP_NAME = Converter
 APP_BUNDLE_ID = com.nagarro.converter
 
 // SDK API Key
-API_KEY = a4227c67327fcc1cc44904f75a0743cf
+API_KEY = 62f8f52514d98a59b65d4b844e9063f4
 
 // Server URL
 BASE_URL = http:/$()/data.fixer.io/api/
