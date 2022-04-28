@@ -7,3 +7,13 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+
+// App Setting
+APP_NAME = Converter
+APP_BUNDLE_ID = com.nagarro.converter
+
+// SDK API Key
+API_KEY = FixerAPIKey
+
+// Server URL
+BASE_URL = http:/$()/data.fixer.io/api/
