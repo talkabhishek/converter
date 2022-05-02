@@ -21,6 +21,8 @@ protocol ConverterViewModelConformable {
     var toButtonValue: BehaviorRelay<String> { get }
     var fromFieldValue: BehaviorRelay<String?> { get }
     var toFieldValue: BehaviorRelay<String?> { get }
+    var isSwapEnabled: BehaviorRelay<Bool> { get }
+    var isDetailEnabled: BehaviorRelay<Bool> { get}
     var currencies: [String] { get }
 
     func getLatestValues()
@@ -34,10 +36,12 @@ struct ConverterViewModel: ConverterViewModelConformable {
     var apiServiceManager: APIServiceProtocol
     var latestValue: BehaviorRelay<ConverterData?> = BehaviorRelay(value: nil)
     var errorData: BehaviorRelay<ErrorData?> = BehaviorRelay(value: nil)
-    var fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From")
-    var toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To")
+    var fromButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "From"~)
+    var toButtonValue: BehaviorRelay<String> = BehaviorRelay(value: "To"~)
     var fromFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var toFieldValue: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var isSwapEnabled: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var isDetailEnabled: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var currencies: [String] {
         guard let list = latestValue.value?.rates?.keys.sorted() else {
             return ["USD", "EGP", "INR"]
@@ -68,10 +72,6 @@ struct ConverterViewModel: ConverterViewModelConformable {
     }
 
     func swapSymbols() {
-        guard fromButtonValue.value != "From" &&
-                toButtonValue.value != "To" else {
-            return
-        }
         let swapSymbol = fromButtonValue.value
         fromButtonValue.accept(toButtonValue.value)
         toButtonValue.accept(swapSymbol)

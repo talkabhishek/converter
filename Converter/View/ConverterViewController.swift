@@ -38,6 +38,24 @@ class ConverterViewController: BaseViewController, Injectable {
 
     // MARK: User Defined function
     private func setupObserver() {
+        // Observe Combined observable
+        Observable.combineLatest(viewModel.fromButtonValue, viewModel.toButtonValue, viewModel.fromFieldValue).subscribe { [unowned self] from, to, fromValue in
+            self.viewModel.isSwapEnabled.accept(from != "From"~ &&
+                                                    to != "To"~)
+            self.viewModel.isDetailEnabled.accept(from != "From"~ &&
+                                                    to != "To"~ &&
+                                                    fromValue != nil &&
+                                                    fromValue != "")
+        }.disposed(by: disposeBag)
+
+        viewModel.isSwapEnabled
+            .bind(to: swapButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        viewModel.isDetailEnabled
+            .bind(to: detailsButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
         // Observe Dropdown selection
         dropdown.selectedItem.asObservable().subscribe(onNext: { [unowned self] value in
             guard let value = value else {
@@ -144,10 +162,6 @@ class ConverterViewController: BaseViewController, Injectable {
     }
 
     func showDetails() {
-        guard viewModel.fromButtonValue.value != "From" &&
-                viewModel.toButtonValue.value != "To" else {
-            return
-        }
         guard let baseValueStr = viewModel.fromFieldValue.value,
               let baseValue = Double(baseValueStr) else {
             return
